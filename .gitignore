@@ -1,0 +1,18 @@
+#dependencies
+/node_modules
+
+#next.js
+/.next/
+/out/
+
+.DS_Store
+
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+# editor preferences
+.vscode/settings.json
