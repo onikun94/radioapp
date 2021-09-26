@@ -9,19 +9,20 @@ import styled from "@emotion/styled";
 import { colors } from "../../styles/color";
 import { Header } from "../molecules/header";
 import { SearchBar } from "../organisms/search-bar";
+import { PostCard } from "../molecules/post-card";
 
 export type YatoListPropType = {
   yatoInfo: YatoType[];
-  searchValue: string;
-  onChangeSearch: (text: string) => void;
-  onClickSearch: () => void;
+  // searchValue: string;
+  // onChangeSearch: (text: string) => void;
+  // onClickSearch: () => void;
 };
 
 export const YatoList: VFC<YatoListPropType> = ({
   yatoInfo,
-  searchValue,
-  onChangeSearch,
-  onClickSearch,
+  // searchValue,
+  // onChangeSearch,
+  // onClickSearch,
 }) => {
   // export const YatoList = (props) => {
   //   const yato = props.yato;
@@ -32,7 +33,7 @@ export const YatoList: VFC<YatoListPropType> = ({
   //   console.log(yato);
   //   console.log(typeof yato);
   // };
-
+  const logo = "https://cdn.rawgit.com/emotion-js/emotion/main/emotion.png";
   return (
     <Container>
       <HeaderContainer>
@@ -42,14 +43,24 @@ export const YatoList: VFC<YatoListPropType> = ({
           textType="24bold"
         ></Header>
       </HeaderContainer>
-      <SearchBar
+      {/* <SearchBar
         value={searchValue}
         onChange={onChangeSearch}
         onClickSearch={onClickSearch}
-      />
-      {/* {yatoInfo.map((item) => (
-        <></>
-      ))} */}
+        iconSearch={logo}
+      /> */}
+      {yatoInfo.map((info) => (
+        <>
+          <PostCard
+            user={info.user}
+            address={info.address}
+            segment={info.segment}
+            contents={info.contents}
+            answer={info.answer}
+            on_air={info.on_air}
+          />
+        </>
+      ))}
     </Container>
   );
   // <div>
