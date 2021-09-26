@@ -1,12 +1,11 @@
 import styled from "@emotion/styled";
 import { PostContents } from "../molecules/post-contents";
 import { Header } from "../molecules/header";
-import { Divider } from "../atoms/divider";
 import { VFC } from "react";
 
 export type postContentsContainerPropType = {
   postContentsInfo: {
-    name: string;
+    user: string;
     answer: string;
   }[];
 };
@@ -17,15 +16,15 @@ export const PostContentsContainer: VFC<postContentsContainerPropType> = ({
   return (
     <Container>
       <Header headerText="投稿内容" colorType="light" textType="16bold" />
-      {postContentsInfo.map((info, index) => {
+
+      {postContentsInfo.map((info, index) => (
         <>
           <PostContents
-            postContentName={info.name}
+            postContentName={info.user}
             postContentAnswer={info.answer}
           />
-          <Divider />
-        </>;
-      })}
+        </>
+      ))}
     </Container>
   );
 };

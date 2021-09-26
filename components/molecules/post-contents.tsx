@@ -32,13 +32,13 @@ const Container = styled.div({
 });
 
 const PostContentName = styled.div({
-  width: "50px",
+  width: "120px",
   padding: "20px",
   textAlign: "left",
 });
 
 const PostContentAnswer = styled.div({
-  width: "50%",
+  width: "300px",
   padding: "20px",
   textAlign: "right",
 });

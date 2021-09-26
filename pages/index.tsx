@@ -16,7 +16,8 @@ import { Header } from "../components/molecules/header";
 import { IconButton } from "../components/molecules/icon-button";
 import { PostCard } from "../components/molecules/post-card";
 import { PostContents } from "../components/molecules/post-contents";
-
+import { PostContentsContainer } from "../components/organisms/postContents-container";
+import { Respon } from "../types/yato";
 // export type TopPagePropType = {
 //   yatos: YatoType[];
 // };
@@ -30,17 +31,18 @@ import { PostContents } from "../components/molecules/post-contents";
 //   pt: 0,
 // };
 const TopPage = () => {
-  // const [yatos, setYatos] = useState<YatoType[]>();
+  const [yatos, setYatos] = useState([]);
   const handleLog = () => {
     console.log("button is pushed");
   };
   // // // 後にSSRに変換する
-  // useEffect(() => {
-  //   (async () => {
-  //     const res = await getYato();
-  //     setYatos(res.yatos);
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      const res = await getYato();
+      setYatos(res);
+      console.log(yatos);
+    })();
+  }, []);
   // const logo = "https://gyazo.com/74a4f1c158b3bb397f3d30f0ff1fc53e";
   const logo = "https://cdn.rawgit.com/emotion-js/emotion/main/emotion.png";
   return (
@@ -78,6 +80,8 @@ const TopPage = () => {
         postContentName="ポストカードクラフトスマン"
         postContentAnswer="波田陽区の斬撃が、今になって命中した！"
       ></PostContents>
+      <Divider />
+      <PostContentsContainer postContentsInfo={yatos} />
     </MainText>
 
     // <YatoList
