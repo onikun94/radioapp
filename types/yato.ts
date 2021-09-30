@@ -1,4 +1,5 @@
 export type YatoType = {
+  id: number;
   on_air: string;
   segment: string;
   address: string;

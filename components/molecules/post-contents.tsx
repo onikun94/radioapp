@@ -6,17 +6,19 @@ import { VFC } from "react";
 export type PostContentsPropType = {
   postContentName: string;
   postContentAnswer: string;
+  postKey: number;
   className?: string;
 };
 
 export const PostContents: VFC<PostContentsPropType> = ({
   postContentName,
   postContentAnswer,
+  postKey,
   className,
 }) => {
   return (
     <Container>
-      <PostContentName>
+      <PostContentName key={postKey}>
         <Typography text={postContentName} type="14normal" />
       </PostContentName>
       <PostContentAnswer>

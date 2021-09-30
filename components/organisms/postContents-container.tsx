@@ -5,6 +5,7 @@ import { VFC } from "react";
 
 export type postContentsContainerPropType = {
   postContentsInfo: {
+    id: number;
     user: string;
     answer: string;
   }[];
@@ -17,13 +18,14 @@ export const PostContentsContainer: VFC<postContentsContainerPropType> = ({
     <Container>
       <Header headerText="投稿内容" colorType="light" textType="16bold" />
 
-      {postContentsInfo.map((info, index) => (
-        <>
+      {postContentsInfo.map((info) => (
+        <div key={info.id}>
           <PostContents
             postContentName={info.user}
             postContentAnswer={info.answer}
+            postKey={info.id}
           />
-        </>
+        </div>
       ))}
     </Container>
   );
