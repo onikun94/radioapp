@@ -111,6 +111,7 @@ const TextAreaElement = styled.textarea<{
   backgroundColorType: BackgroundColor;
 }>((props) => ({
   backgroundColor: colors.background[props.backgroundColorType],
+  resize: "none",
   border: "none",
   outline: "none",
   width: "90%",
