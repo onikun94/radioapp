@@ -1,7 +1,7 @@
 import React, { useState, VFC } from "react";
 import { YatoType } from "../../types/yato";
 import Link from "next/link";
-import { handleUser } from "../../lib/handler";
+import { handleUser, handleDebug } from "../../lib/handler";
 import { Button } from "../atoms/button";
 import { Divider } from "../atoms/divider";
 import { Typography } from "../atoms/typography";
@@ -49,18 +49,22 @@ export const YatoList: VFC<YatoListPropType> = ({
         onClickSearch={onClickSearch}
         iconSearch={logo}
       /> */}
-      {yatoInfo.map((info) => (
-        <>
-          <PostCard
-            user={info.user}
-            address={info.address}
-            segment={info.segment}
-            contents={info.contents}
-            answer={info.answer}
-            on_air={info.on_air}
-          />
-        </>
-      ))}
+      <CardContainer>
+        {yatoInfo.map((info) => (
+          <div key={info.id}>
+            <PostCard
+              onClick={handleDebug}
+              cardKey={info.id}
+              user={info.user}
+              address={info.address}
+              segment={info.segment}
+              contents={info.contents}
+              answer={info.answer}
+              on_air={info.on_air}
+            />
+          </div>
+        ))}
+      </CardContainer>
     </Container>
   );
   // <div>
@@ -91,10 +95,18 @@ export const YatoList: VFC<YatoListPropType> = ({
 };
 
 const Container = styled.div({
-  display: "flex",
+  // display: "flex",
+  maxWidth: "100%",
   flexDirection: "column",
-  flexWrap: "wrap",
+  // flexWrap: "wrap",
   backgroundColor: colors.background.primary,
+});
+
+const CardContainer = styled.div({
+  display: "flex",
+  justifyContent: "center",
+  flexWrap: "wrap",
+  // width: "1000",
 });
 
 const ButtonContainer = styled.div({

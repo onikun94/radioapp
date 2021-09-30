@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import Link from "next";
 import { getYato, searchUser } from "../api/getShimo";
-import { Layout } from "../components/Layout";
 import { YatoList } from "../components/templates/yato-list";
 import type { GetServerSideProps, NextPage } from "next";
 import { YatoType } from "../types/yato";
@@ -47,7 +46,7 @@ const TopPage = () => {
   const logo = "https://cdn.rawgit.com/emotion-js/emotion/main/emotion.png";
   return (
     <MainText>
-      <Header headerText="this is header" colorType="light"></Header>
+      {/* <Header headerText="this is header" colorType="light"></Header>
       <p>this is button</p>
       <Button onClick={handleLog} backgroundColor="dark">
         <p>test</p>
@@ -66,9 +65,9 @@ const TopPage = () => {
         backgroundColor={"primary"}
       />
       <Typography text="this is typography" type="16bold" />
-      {/* <Icon source={{ uri: emotionLogo }} /> */}
       <IconButton onClick={handleLog} iconImage={logo}></IconButton>
       <PostCard
+        cardKey={1}
         user="ポストカードクラフトスマン"
         address="東京都葛飾区"
         segment="野党"
@@ -79,10 +78,11 @@ const TopPage = () => {
       <PostContents
         postContentName="ポストカードクラフトスマン"
         postContentAnswer="波田陽区の斬撃が、今になって命中した！"
+        postKey={1}
       ></PostContents>
       <Divider />
       <p>投稿内容一覧（postContents-container）</p>
-      <PostContentsContainer postContentsInfo={yatos} />
+      <PostContentsContainer postContentsInfo={yatos} /> */}
       <YatoList yatoInfo={yatos} />
     </MainText>
 
@@ -105,6 +105,6 @@ const TopPage = () => {
 //   )
 
 // }
-const MainText = styled.div();
+const MainText = styled.div({});
 
 export default TopPage;

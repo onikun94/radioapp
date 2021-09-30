@@ -17,6 +17,6 @@ export const handleOnChangeSearch = async (searchWord: string) => {
 export const handleOnClickHeader = async () => {
   console.log("headerclick is ok");
 };
-export const handleDebug = (test) => {
-  console.log(test);
+export const handleDebug = () => {
+  console.log("button is pushed");
 };
