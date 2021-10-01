@@ -1,7 +1,7 @@
 import React, { useState, VFC } from "react";
 import { YatoType } from "../../types/yato";
 import Link from "next/link";
-import { handleUser, handleDebug } from "../../lib/handler";
+import { handleUser, handleDebug, handleOnPage } from "../../lib/handler";
 import { Button } from "../atoms/button";
 import { Divider } from "../atoms/divider";
 import { Typography } from "../atoms/typography";
@@ -53,7 +53,7 @@ export const YatoList: VFC<YatoListPropType> = ({
         {yatoInfo.map((info) => (
           <div key={info.id}>
             <PostCard
-              onClick={handleDebug}
+              onClick={handleUser}
               cardKey={info.id}
               user={info.user}
               address={info.address}

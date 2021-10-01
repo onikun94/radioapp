@@ -80,9 +80,9 @@ const TopPage = () => {
         postContentAnswer="波田陽区の斬撃が、今になって命中した！"
         postKey={1}
       ></PostContents>
-      <Divider />
+      <Divider /> */}
       <p>投稿内容一覧（postContents-container）</p>
-      <PostContentsContainer postContentsInfo={yatos} /> */}
+      <PostContentsContainer postContentsInfo={yatos} />
       <YatoList yatoInfo={yatos} />
     </MainText>
 

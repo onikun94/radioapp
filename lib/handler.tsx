@@ -1,5 +1,5 @@
 import React from "react";
-import { Router } from "next/router";
+import { useRouter } from "next/router";
 
 export const handleUser = () => {
   console.log("ok");
@@ -7,6 +7,12 @@ export const handleUser = () => {
 
 export const handleOnSearch = async () => {
   console.log("search is ok");
+};
+
+export const handleOnPage = () => {
+  const router = useRouter();
+  console.log("this is handleOnPage");
+  router.push("/detail");
 };
 export const handleOnChangeSearch = async (searchWord: string) => {
   if (searchWord !== "") {
