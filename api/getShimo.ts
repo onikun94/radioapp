@@ -12,7 +12,10 @@ export const getYato = async (): Promise<Response> => {
 };
 
 export const searchUser = async (user) => {
-  const res = await fetch(`http://localhost:8000/yato/?user=${user}`, {
+  console.log("user is ");
+  console.log(user);
+  const data = encodeURI(user);
+  const res = await fetch(`http://localhost:8000/yato/?user=${data}`, {
     method: "GET",
   });
 
