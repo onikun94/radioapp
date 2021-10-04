@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import Link from "next";
+import Link from "next/link";
 import { getYato, searchUser } from "../api/getShimo";
-import { YatoList } from "../components/templates/yato-list";
+import { PostList } from "../components/templates/post-list";
 import type { GetServerSideProps, NextPage } from "next";
 import { YatoType } from "../types/yato";
 import { handleOnChangeSearch, handleOnSearch } from "../lib/handler";
@@ -16,7 +16,8 @@ import { IconButton } from "../components/molecules/icon-button";
 import { PostCard } from "../components/molecules/post-card";
 import { PostContents } from "../components/molecules/post-contents";
 import { PostContentsContainer } from "../components/organisms/postContents-container";
-import { Respon } from "../types/yato";
+import { Response } from "../types/yato";
+import Test from "./users/[name]";
 // export type TopPagePropType = {
 //   yatos: YatoType[];
 // };
@@ -29,21 +30,23 @@ import { Respon } from "../types/yato";
 //   answer: "大喜利のお題でしか聞かない形容詞",
 //   pt: 0,
 // };
-const TopPage = () => {
-  const [yatos, setYatos] = useState([]);
-  const handleLog = () => {
-    console.log("button is pushed");
-  };
+
+export type TopPagePropType = {
+  response: YatoType[];
+};
+const TopPage: NextPage<TopPagePropType> = ({ response }) => {
+  // const [yatos, setYatos] = useState([]);
+
   // // // 後にSSRに変換する
-  useEffect(() => {
-    (async () => {
-      const res = await getYato();
-      setYatos(res);
-      console.log(yatos);
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const res = await getYato();
+  //     setYatos(res);
+  //     console.log(yatos);
+  //   })();
+  // }, []);
   // const logo = "https://gyazo.com/74a4f1c158b3bb397f3d30f0ff1fc53e";
-  const logo = "https://cdn.rawgit.com/emotion-js/emotion/main/emotion.png";
+  // const logo = "https://cdn.rawgit.com/emotion-js/emotion/main/emotion.png";
   return (
     <MainText>
       {/* <Header headerText="this is header" colorType="light"></Header>
@@ -81,9 +84,13 @@ const TopPage = () => {
         postKey={1}
       ></PostContents>
       <Divider /> */}
-      <p>投稿内容一覧（postContents-container）</p>
-      <PostContentsContainer postContentsInfo={yatos} />
-      <YatoList yatoInfo={yatos} />
+      {/* <p>投稿内容一覧（postContents-container）</p>
+      <PostContentsContainer postContentsInfo={yatos} /> */}
+      <Link href="/detail">
+        <a>detail</a>
+      </Link>
+
+      <PostList yatoInfo={response} />
     </MainText>
 
     // <YatoList
@@ -95,16 +102,13 @@ const TopPage = () => {
   );
 };
 
-// export const getServerSideProps:GetServerSideProps = async () =>{
-//   const response = await getYato()
+export const getServerSideProps = async () => {
+  const response = await getYato();
+  return {
+    props: { response },
+  };
+};
 
-//   return(
-//    props:{
-//      yatos:response.yato,
-//    }
-//   )
-
-// }
 const MainText = styled.div({});
 
 export default TopPage;

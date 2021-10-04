@@ -9,6 +9,6 @@ export type YatoType = {
   pt: number;
 };
 
-export type Respon = {
+export type Response = {
   yatos: YatoType[];
 };
