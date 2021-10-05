@@ -34,7 +34,7 @@ const Container = styled.div({
 });
 
 const PostContentName = styled.div({
-  width: "120px",
+  width: "200px",
   padding: "20px",
   textAlign: "left",
 });
