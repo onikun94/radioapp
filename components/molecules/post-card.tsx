@@ -31,35 +31,33 @@ export const PostCard: VFC<PostCardPropType> = ({
   height,
 }) => {
   return (
-    <Link href="detail">
-      <Container key={cardKey} onClick={onClick} height={height}>
-        <Thumbnail>
-          <Typography text={thumbnail} type="14bold"></Typography>
-        </Thumbnail>
-        <SideText>
-          <Detail>
-            <Typography text={detail1} type="14normal" />
-            <Typography text={detail2} type="14normal" />
-            <Typography text={detail3} type="14normal" />
-            {detail4 ? (
-              <Typography text={String(detail4)} type="14normal" />
-            ) : (
-              <Typography text={""} type="14normal" />
-            )}
+    <Container key={cardKey} onClick={onClick} height={height}>
+      <Thumbnail>
+        <Typography text={thumbnail} type="14bold"></Typography>
+      </Thumbnail>
+      <SideText>
+        <Detail>
+          <Typography text={detail1} type="14normal" />
+          <Typography text={detail2} type="14normal" />
+          <Typography text={detail3} type="14normal" />
+          {detail4 ? (
+            <Typography text={String(detail4)} type="14normal" />
+          ) : (
+            <Typography text={""} type="14normal" />
+          )}
 
-            {/* <Typography text={segment} type="14normal" />
+          {/* <Typography text={segment} type="14normal" />
           <Typography text={contents} type="14normal" />
           <Typography text={answer} type="14normal" /> */}
-          </Detail>
-          <MainText>
-            <Typography text={maintext1} type="20bold" />
-          </MainText>
-          <MainText>
-            <Typography text={maintext2} type="20bold" />
-          </MainText>
-        </SideText>
-      </Container>
-    </Link>
+        </Detail>
+        <MainText>
+          <Typography text={maintext1} type="20bold" />
+        </MainText>
+        <MainText>
+          <Typography text={maintext2} type="20bold" />
+        </MainText>
+      </SideText>
+    </Container>
   );
 };
 

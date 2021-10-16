@@ -23,6 +23,7 @@ const UserPost: VFC<UserPostPropType> = ({ userdata }) => {
   );
 };
 
+// this serversideprops will be removed
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const userdata = await searchUser(context.query.name);
   return {

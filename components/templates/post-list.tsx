@@ -1,7 +1,7 @@
 import React, { VFC } from "react";
 import { YatoType } from "../../types/yato";
 
-import { handleUser } from "../../lib/handler";
+import { handleOnPage, handleUser } from "../../lib/handler";
 import styled from "@emotion/styled";
 import { colors } from "../../styles/color";
 import { Header } from "../molecules/header";

@@ -1,39 +1,30 @@
-import React, { useState, VFC } from "react";
+import React, { VFC } from "react";
 import { YatoType } from "../../types/yato";
-import Link from "next/link";
-import { handleUser, handleDebug, handleOnPage } from "../../lib/handler";
-import { Button } from "../atoms/button";
-import { Divider } from "../atoms/divider";
-import { Typography } from "../atoms/typography";
+
+import { handleUser } from "../../lib/handler";
 import styled from "@emotion/styled";
 import { colors } from "../../styles/color";
 import { Header } from "../molecules/header";
-import { SearchBar } from "../organisms/search-bar";
 import { PostCard } from "../molecules/post-card";
+import Router, { useRouter } from "next/router";
+import { send } from "process";
 
 export type YatoListPropType = {
   yatoInfo: YatoType[];
-  // searchValue: string;
-  // onChangeSearch: (text: string) => void;
-  // onClickSearch: () => void;
 };
 
-export const YatoList: VFC<YatoListPropType> = ({
-  yatoInfo,
-  // searchValue,
-  // onChangeSearch,
-  // onClickSearch,
-}) => {
-  // export const YatoList = (props) => {
-  //   const yato = props.yato;
-  //   const [users, setUser] = useState([]);
-
-  // const handleTest = () => {
-  //   console.log("this is test");
-  //   console.log(yato);
-  //   console.log(typeof yato);
-  // };
-  const logo = "https://cdn.rawgit.com/emotion-js/emotion/main/emotion.png";
+export const YatoList: VFC<YatoListPropType> = ({ yatoInfo }) => {
+  const router = useRouter();
+  // ここにクリックでユーザ名をクエリに渡す関数を作る
+  const sendUsername = (e, user) => {
+    e.preve;
+    // router.push(`/users/ポストカードクラフトスマン`);
+    if (user !== null) {
+      router.push(`/users/${user}`);
+    } else {
+      return null;
+    }
+  };
   return (
     <Container>
       <HeaderContainer>
@@ -43,55 +34,28 @@ export const YatoList: VFC<YatoListPropType> = ({
           textType="24bold"
         ></Header>
       </HeaderContainer>
-      {/* <SearchBar
-        value={searchValue}
-        onChange={onChangeSearch}
-        onClickSearch={onClickSearch}
-        iconSearch={logo}
-      /> */}
+
       <CardContainer>
         {yatoInfo.map((info) => (
           <div key={info.id}>
             <PostCard
-              onClick={handleUser}
+              onClick={() =>
+                router.push({
+                  pathname: "users/[namer]",
+                  query: { namer: info.user },
+                })
+              }
+              // onClick={handleUser}
               cardKey={info.id}
-              user={info.user}
-              address={info.address}
-              segment={info.segment}
-              contents={info.contents}
-              answer={info.answer}
-              on_air={info.on_air}
+              thumbnail={info.segment}
+              detail1={info.address}
+              maintext1={info.user}
             />
           </div>
         ))}
       </CardContainer>
     </Container>
   );
-  // <div>
-  //   <p>投稿一覧</p>
-  //     {/* <Button
-  //       backgroundColor={"primary"}
-  //       textColor={"primary"}
-  //       onClick={handleUser}
-  //     >
-  //       <Typography text="okボタン" type="24bold" />
-  //     </Button> */}
-  //     {/* <button onClick={handleTest}>検証</button> */}
-  //     {/* <>
-  //       {yato.map((d) => (
-  //         <>
-  //           <p>{d.on_air}</p>
-  //           <p>{d.address}</p>
-  //           <p>{d.user}</p>
-  //           <p>{d.contents}</p>
-  //           <p>{d.answer}</p>
-  //           <p>{d.pt}</p>
-  //           <p>-------------</p>
-  //         </>
-  //       ))}
-  //     </> */}
-  //   // </div>
-  // );
 };
 
 const Container = styled.div({
@@ -108,13 +72,5 @@ const CardContainer = styled.div({
   flexWrap: "wrap",
   // width: "1000",
 });
-
-const ButtonContainer = styled.div({
-  display: "flex",
-  padding: "10px",
-  justifyContent: "space-between",
-});
-
-const LinkContainer = styled.a({});
 
 const HeaderContainer = styled.div({});
