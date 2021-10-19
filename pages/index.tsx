@@ -86,8 +86,12 @@ const TopPage: NextPage<TopPagePropType> = ({ response }) => {
       <Divider /> */}
       {/* <p>投稿内容一覧（postContents-container）</p>
       <PostContentsContainer postContentsInfo={yatos} /> */}
-      <Link href="/detail">
-        <a>detail</a>
+      <Link href="/users">
+        <a>ユーザ一覧</a>
+      </Link>
+      <p></p>
+      <Link href="/search">
+        <a>search</a>
       </Link>
 
       <PostList yatoInfo={response} />

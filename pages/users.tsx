@@ -9,7 +9,7 @@ export type DetailPagePropType = {
   response: YatoType[];
 };
 
-const DetailPage: VFC<DetailPagePropType> = ({ response }) => {
+const UsersPage: VFC<DetailPagePropType> = ({ response }) => {
   return (
     <MainText>
       <Link href="/">
@@ -29,4 +29,4 @@ export const getServerSideProps = async () => {
 
 const MainText = styled.div({});
 
-export default DetailPage;
+export default UsersPage;
