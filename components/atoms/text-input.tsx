@@ -89,6 +89,7 @@ import { BackgroundColor, colors } from "../../styles/color";
 //   })
 // );
 type TextAreaPropType = {
+  onChange: (text: string) => void;
   backgroundColor: BackgroundColor;
   // value: string;
   placeholder: string;
@@ -96,6 +97,7 @@ type TextAreaPropType = {
 
 export const TextArea: VFC<TextAreaPropType> = ({
   placeholder,
+  onChange,
   // value,
   backgroundColor,
 }) => {
@@ -104,6 +106,7 @@ export const TextArea: VFC<TextAreaPropType> = ({
       // value={value} //value指定すると文字打てなくなるけど....
       placeholder={placeholder}
       backgroundColorType={backgroundColor}
+      onChange={(e) => onChange(e.target.value)}
     />
   );
 };
@@ -114,13 +117,13 @@ const TextAreaElement = styled.textarea<{
   resize: "none",
   border: "none",
   outline: "none",
-  width: "90%",
+  width: "200px",
   marginRight: "10px",
   color: colors.text.accent,
   borderBottom: `1px solid ${colors.base.alphaPrimary}`, //下線がつく
   "::placeholder": {
     color: colors.text.gray,
-    fontSize: "14px",
+    // fontSize: "14px",
   },
   ":focus": {
     borderBottom: `1px solid ${colors.base.accent}`,
