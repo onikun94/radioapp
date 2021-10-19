@@ -15,16 +15,7 @@ export type YatoListPropType = {
 
 export const YatoList: VFC<YatoListPropType> = ({ yatoInfo }) => {
   const router = useRouter();
-  // ここにクリックでユーザ名をクエリに渡す関数を作る
-  const sendUsername = (e, user) => {
-    e.preve;
-    // router.push(`/users/ポストカードクラフトスマン`);
-    if (user !== null) {
-      router.push(`/users/${user}`);
-    } else {
-      return null;
-    }
-  };
+
   return (
     <Container>
       <HeaderContainer>
@@ -41,8 +32,8 @@ export const YatoList: VFC<YatoListPropType> = ({ yatoInfo }) => {
             <PostCard
               onClick={() =>
                 router.push({
-                  pathname: "users/[namer]",
-                  query: { namer: info.user },
+                  pathname: "users/[name]",
+                  query: { name: info.user },
                 })
               }
               // onClick={handleUser}
