@@ -49,8 +49,9 @@ export const searchSegment = async (segment) => {
   return _res;
 };
 
-export const searchcontents = async (contents) => {
-  const res = await fetch(`http://localhost:8000/yato/?contents=${contents}`, {
+export const searchContents = async (contents) => {
+  const data = encodeURI(contents);
+  const res = await fetch(`http://localhost:8000/yato/?contents=${data}`, {
     method: "GET",
   });
 
