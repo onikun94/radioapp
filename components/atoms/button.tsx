@@ -63,7 +63,7 @@ export type ButtonType = {
   backgroundColor?: BackgroundColor;
   textColor?: BaseColor;
   className?: string;
-  children: JSX.Element;
+  children: string;
   onClick: () => void;
 };
 
@@ -94,7 +94,7 @@ const ButtonContainer = styled.button<{
   alignItems: "center",
   color: colors.base[props.textColor ?? DEFAULT_TEXT_COLOR],
   height: "auto",
-  width: "100%", //横幅
+  width: "50px", //横幅
   borderRadius: "4px", //縁の線
   boxSizing: "border-box",
   fontsize: "16px",
