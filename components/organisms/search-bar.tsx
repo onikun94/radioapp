@@ -4,9 +4,9 @@ import { IconButton } from "../molecules/icon-button";
 import { TextArea } from "../atoms/text-input";
 
 export type SearchBarPropType = {
-  value: string;
+  value?: string;
   iconSearch: string;
-  onChange: (text: string) => void;
+  onChange?: (text: string) => void;
   onClickSearch: () => void;
 };
 
@@ -18,6 +18,13 @@ export const SearchBar: VFC<SearchBarPropType> = ({
 }) => {
   return (
     <Container>
+      <SearchTextField
+        // type="text"
+        placeholder="search "
+        // value={value}
+        onChange={onChange}
+        backgroundColor="primary"
+      />
       <SearchButton
         // iconType="search"
         iconImage={iconSearch}
@@ -25,13 +32,6 @@ export const SearchBar: VFC<SearchBarPropType> = ({
         backgroundColor="primary"
         onClick={onClickSearch}
         iconHeight="30px"
-      />
-      <SearchTextField
-        // type="text"
-        placeholder="search "
-        // value={value}
-        // onChange={onChange}
-        backgroundColor="primary"
       />
     </Container>
   );
@@ -44,12 +44,12 @@ const Container = styled.div({
 });
 
 const SearchTextField = styled(TextArea)({
-  height: "48px",
-  maxWidth: "582px",
+  height: "20px",
+  maxWidth: "20px",
 });
 
 const SearchButton = styled(IconButton)({
   borderRadius: "0 4px 4px 0",
-  width: "32px",
-  height: "48px",
+  width: "8px",
+  height: "4px",
 });
