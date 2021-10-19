@@ -1,85 +1,51 @@
-// import React, { useState } from "react";
-// import router, { useRouter } from "next/router";
-// import {
-//   searchUser,
-//   searchAddress,
-//   searchcontents,
-//   searchAnswer,
-// } from "../api/getShimo";
-// // import { Layout } from "../components/Layout";
-// import { YatoType } from "../types/yato";
-// // import { YatoData } from ".";
-// import styled from "@emotion/styled";
-// // import { TextInput } from "../components/atoms/text-input";
+import React, { VFC } from "react";
+import { YatoType } from "../types/yato";
+import styled from "@emotion/styled";
+import Link from "next/link";
+import { PostList } from "../components/templates/post-list";
+import { getYato, searchContents } from "../api/getShimo";
+import { SearchBar } from "../components/organisms/search-bar";
+import { handleOnChangeSearch, handleOnSearch } from "../lib/handler";
+import { useContents } from "../lib/hook";
 
-// export const YatoData: YatoType = {
-//   on_air: "",
-//   segment: "",
-//   address: "",
-//   user: "",
-//   contents: "",
-//   answer: "",
-//   pt: 0,
-// };
+type SearchPagePropsType = {
+  response: YatoType[];
+  paramSerachWord: string;
+};
 
-// const SearchPage = () => {
-//   const [user, setUser] = useState([YatoData]);
-//   const [keyword, setKeyword] = useState<string>("");
-//   const [link, setLink] = useState(null);
-//   const router = useRouter();
+const SearchPage: VFC<SearchPagePropsType> = ({
+  response,
+  paramSerachWord,
+}) => {
+  const { searchWord, setSearchWord } = useContents(paramSerachWord);
 
-//   const handleSubmit = async (words: string) => {
-//     console.log("handle");
-//     if (keyword !== "") {
-//       router.push({
-//         // pathname: "/result",
-//         query: { word: words },
-//       });
-//       const res = await searchUser(words);
-//       // console.log(`res = ${res[0].answer}`);
-//       console.log(typeof res);
-//       setUser(res);
-//       setLink(res.links);
-//     }
-//   };
+  return (
+    <SearchText>
+      <Link href="/">home</Link>　
+      <SearchBar
+        onChange={(e) => handleOnChangeSearch(e, setSearchWord)}
+        iconSearch="検索"
+        onClickSearch={() => handleOnSearch(searchWord)}
+      ></SearchBar>
+      <PostList yatoInfo={response}></PostList>
+    </SearchText>
+  );
+};
 
-//   const handleWord = (word) => {
-//     setKeyword(word);
-//   };
+export const getServerSideProps = async (context) => {
+  const searchWord = String(context.query.q);
+  console.log(searchWord);
 
-//   return (
-//     <Layout>
-//       <div>this is searchPage</div>
+  const response = await searchContents(searchWord);
 
-//       <form
-//         onSubmit={(e) => {
-//           e.preventDefault();
-//           handleSubmit(keyword);
-//           console.log("submit");
-//         }}
-//       >
-//         <input
-//           type="text"
-//           onChange={(e) => {
-//             handleWord(e.target.value);
-//           }}
-//         />
-//       </form>
-//       <>
-//         {user.map((d) => (
-//           <>
-//             <p>{d.on_air}</p>
-//             <p>{d.address}</p>
-//             <p>{d.user}</p>
-//             <p>{d.contents}</p>
-//             <p>{d.answer}</p>
-//             <p>{d.pt !== 0 ? d.pt : ""}</p>
-//             <p>-------------</p>
-//           </>
-//         ))}
-//       </>
-//     </Layout>
-//   );
-// };
+  return {
+    props: {
+      response: response,
+      paramSerachWord: searchWord,
+    },
+  };
+};
 
-// export default SearchPage;
+const SearchText = styled.div({});
+
+export default SearchPage;
