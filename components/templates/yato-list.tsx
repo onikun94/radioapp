@@ -16,6 +16,15 @@ export type YatoListPropType = {
 export const YatoList: VFC<YatoListPropType> = ({ yatoInfo }) => {
   const router = useRouter();
 
+  const dupArray = Array.from(
+    yatoInfo
+      .reduce(
+        (map, currentitem) => map.set(currentitem.user, currentitem),
+        new Map()
+      )
+      .values()
+  );
+
   return (
     <Container>
       <HeaderContainer>
@@ -27,7 +36,7 @@ export const YatoList: VFC<YatoListPropType> = ({ yatoInfo }) => {
       </HeaderContainer>
 
       <CardContainer>
-        {yatoInfo.map((info) => (
+        {dupArray.map((info) => (
           <div key={info.id}>
             <PostCard
               onClick={() =>
@@ -36,7 +45,6 @@ export const YatoList: VFC<YatoListPropType> = ({ yatoInfo }) => {
                   query: { name: info.user },
                 })
               }
-              // onClick={handleUser}
               cardKey={info.id}
               thumbnail={info.segment}
               detail1={info.address}
