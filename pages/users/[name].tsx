@@ -1,4 +1,5 @@
 import { GetServerSideProps } from "next";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState, VFC } from "react";
 import { searchUser } from "../../api/getShimo";
@@ -17,7 +18,7 @@ const UserPost: VFC<UserPostPropType> = ({ userdata }) => {
 
   return (
     <>
-      <p>{pname}</p>
+      <Link href="/">home</Link>　<p>{pname}</p>
       <PostList yatoInfo={userdata} />
     </>
   );
