@@ -93,6 +93,10 @@ const TopPage: NextPage<TopPagePropType> = ({ response }) => {
       <Link href="/search">
         <a>search</a>
       </Link>
+      <p></p>
+      <Link href="/ranking">
+        <a>ランキング</a>
+      </Link>
 
       <PostList yatoInfo={response} />
     </MainText>
