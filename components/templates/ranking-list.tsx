@@ -14,19 +14,18 @@ export const RankingList: VFC<RankingListPropType> = ({ rankingData }) => {
     return data.user;
   });
   //重複ユーザ削除
-  const onlyUser = user.filter((x, i, self) => {
-    return self.indexOf(x) === i;
-  });
+  // const onlyUser = user.filter((x, i, self) => {
+  //   return self.indexOf(x) === i;
+  // });
+
+  const onlyUser = Array.from(new Set(user));
 
   const dst = rankingData.map((e) => ({
     user: e.user,
     address: e.address,
     pt: e.pt,
   }));
-  //住所などの情報も一緒に絞れるか試した.
-  // const userInfo = dst.filter((x, i, self) => {
-  //   return self.indexOf(x.address) === i;
-  // });
+
   const ptt = onlyUser.map((user) => {
     return dst.filter((rank) => {
       return rank.user == user;
@@ -34,22 +33,36 @@ export const RankingList: VFC<RankingListPropType> = ({ rankingData }) => {
   });
 
   //各ユーザのポイント
-  const anst = ptt.map((result) => {
-    const test = result.map((userData) => {
+  const totalPoint = ptt.map((result) => {
+    const user = result.map((userData) => {
       return userData.user;
     });
-    const testdata = Array.from(new Set(test));
+    const simpleUser = Array.from(new Set(user));
+    const sUser = simpleUser.join("");
 
-    const test2 = result.reduce((n, m) => n + m.pt, 0);
-    let a = {};
-    a[testdata] = test2;
+    const address = result.map((userData) => {
+      return userData.address;
+    });
+    const simpleAddress = Array.from(new Set(address));
+    const sAddress = simpleAddress.join("");
 
-    return a;
+    const point = result.reduce((n, m) => n + m.pt, 0);
+    // let a: { [key: string]: number | string } = {};
+    let duser: { userName: string; address: string; point: number } = {
+      userName: sUser,
+      address: sAddress,
+      point: point,
+    };
+
+    return duser;
   });
+
+  //sort(降順)
+  const sortPoint = totalPoint.sort((a, b) => b.point - a.point);
 
   const handleTest = () => {
     console.log("handleTest");
-    console.log(anst);
+    console.log(totalPoint);
   };
 
   return (
@@ -57,9 +70,13 @@ export const RankingList: VFC<RankingListPropType> = ({ rankingData }) => {
       <div>
         <p>this is ranking page !</p>
         <button onClick={handleTest}>test</button>
-        {/* {anst.map((an) => (
-          <p>{an}</p>
-        ))} */}
+        {sortPoint.map((anstData) => (
+          <div>
+            <p>{anstData.userName}</p>
+            <p>{anstData.address}</p>
+            <p>{anstData.point}</p>
+          </div>
+        ))}
 
         {onlyUser.map((user) => (
           <CardContainer>
