@@ -4,6 +4,10 @@ import { YatoType } from "../../types/yato";
 import { YatoList } from "./yato-list";
 import { colors } from "../../styles/color";
 import { RankCard } from "../molecules/rank-card";
+import { PostCard } from "../molecules/post-card";
+import router from "next/router";
+import { info } from "console";
+import { Header } from "../molecules/header";
 
 type RankingListPropType = {
   rankingData: YatoType[];
@@ -13,14 +17,11 @@ export const RankingList: VFC<RankingListPropType> = ({ rankingData }) => {
   const user = rankingData.map((data) => {
     return data.user;
   });
-  //重複ユーザ削除
-  // const onlyUser = user.filter((x, i, self) => {
-  //   return self.indexOf(x) === i;
-  // });
 
   const onlyUser = Array.from(new Set(user));
 
   const dst = rankingData.map((e) => ({
+    id: e.id,
     user: e.user,
     address: e.address,
     pt: e.pt,
@@ -40,6 +41,12 @@ export const RankingList: VFC<RankingListPropType> = ({ rankingData }) => {
     const simpleUser = Array.from(new Set(user));
     const sUser = simpleUser.join("");
 
+    const id = result.map((userData) => {
+      return userData.id;
+    });
+    const simpleId = Array.from(new Set(id));
+    const sId = simpleId.join("");
+
     const address = result.map((userData) => {
       return userData.address;
     });
@@ -47,8 +54,13 @@ export const RankingList: VFC<RankingListPropType> = ({ rankingData }) => {
     const sAddress = simpleAddress.join("");
 
     const point = result.reduce((n, m) => n + m.pt, 0);
-    // let a: { [key: string]: number | string } = {};
-    let duser: { userName: string; address: string; point: number } = {
+    let duser: {
+      id: number;
+      userName: string;
+      address: string;
+      point: number;
+    } = {
+      id: Number(sId),
       userName: sUser,
       address: sAddress,
       point: point,
@@ -67,27 +79,30 @@ export const RankingList: VFC<RankingListPropType> = ({ rankingData }) => {
 
   return (
     <Container>
-      <div>
-        <p>this is ranking page !</p>
-        <button onClick={handleTest}>test</button>
-        {sortPoint.map((anstData) => (
-          <div>
-            <p>{anstData.userName}</p>
-            <p>{anstData.address}</p>
-            <p>{anstData.point}</p>
-          </div>
-        ))}
+      <HeaderContainer>
+        <Header
+          headerText="shimohuriDatabase"
+          colorType="dark"
+          textType="24bold"
+        ></Header>
+      </HeaderContainer>
 
-        {onlyUser.map((user) => (
-          <CardContainer>
-            <RankCard
-              cardKey={1}
-              onClick={handleTest}
-              maintext1={user}
-            ></RankCard>
-          </CardContainer>
+      <CardContainer>
+        {sortPoint.map((sp) => (
+          <PostCard
+            onClick={() =>
+              router.push({
+                pathname: "users/[name]",
+                query: { name: sp.userName },
+              })
+            }
+            cardKey={sp.id}
+            thumbnail={sp.point.toString() + "pt"}
+            detail1={sp.address}
+            maintext1={sp.userName}
+          ></PostCard>
         ))}
-      </div>
+      </CardContainer>
     </Container>
   );
 };
@@ -106,3 +121,5 @@ const CardContainer = styled.div({
   flexWrap: "wrap",
   // width: "1000",
 });
+
+const HeaderContainer = styled.div({});
