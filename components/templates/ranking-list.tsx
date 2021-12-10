@@ -8,6 +8,7 @@ import { PostCard } from "../molecules/post-card";
 import router from "next/router";
 import { info } from "console";
 import { Header } from "../molecules/header";
+import { DataLink } from "../atoms/data-link";
 
 type RankingListPropType = {
   rankingData: YatoType[];
@@ -72,21 +73,8 @@ export const RankingList: VFC<RankingListPropType> = ({ rankingData }) => {
   //sort(降順)
   const sortPoint = totalPoint.sort((a, b) => b.point - a.point);
 
-  const handleTest = () => {
-    console.log("handleTest");
-    console.log(totalPoint);
-  };
-
   return (
     <Container>
-      <HeaderContainer>
-        <Header
-          headerText="shimohuriDatabase"
-          colorType="dark"
-          textType="24bold"
-        ></Header>
-      </HeaderContainer>
-
       <CardContainer>
         {sortPoint.map((sp) => (
           <PostCard
@@ -121,5 +109,3 @@ const CardContainer = styled.div({
   flexWrap: "wrap",
   // width: "1000",
 });
-
-const HeaderContainer = styled.div({});
