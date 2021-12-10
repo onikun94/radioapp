@@ -95,7 +95,9 @@ const ButtonContainer = styled.button<{
   color: colors.base[props.textColor ?? DEFAULT_TEXT_COLOR],
   height: "auto",
   width: "50px", //横幅
-  borderRadius: "4px", //縁の線
+  borderRadius: "4em", //縁の丸み
+  borderColor: colors.border.cardOutline,
+  borderWidth: "1px",
   boxSizing: "border-box",
   fontsize: "16px",
   backgroundColor:
