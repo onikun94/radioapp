@@ -15,9 +15,14 @@ import { Typography } from "../atoms/typography";
 export type YatoListPropType = {
   yatoInfo: YatoType[];
   userName?: string;
+  pathName?: string;
 };
 
-export const PostList: VFC<YatoListPropType> = ({ userName, yatoInfo }) => {
+export const PostList: VFC<YatoListPropType> = ({
+  userName,
+  pathName,
+  yatoInfo,
+}) => {
   const router = useRouter();
   return (
     <Container>
@@ -27,23 +32,43 @@ export const PostList: VFC<YatoListPropType> = ({ userName, yatoInfo }) => {
       <CardContainer>
         {yatoInfo.map((info) => (
           <div key={info.id}>
-            <PostCard
-              onClick={() =>
-                router.push({
-                  pathname: "users/[name]",
-                  query: { name: info.user },
-                })
-              }
-              cardKey={info.id}
-              thumbnail={info.segment}
-              detail1={info.on_air}
-              detail2={info.address}
-              detail3={info.user}
-              maintext1={info.contents}
-              maintext2={info.answer}
-              detail4={info.pt}
-              height={400}
-            />
+            {pathName === "users" ? (
+              <PostCard
+                onClick={() =>
+                  router.push({
+                    pathname: "[name]",
+                    query: { name: info.user },
+                  })
+                }
+                cardKey={info.id}
+                thumbnail={info.segment}
+                detail1={info.on_air}
+                detail2={info.address}
+                detail3={info.user}
+                maintext1={info.contents}
+                maintext2={info.answer}
+                detail4={info.pt}
+                height={400}
+              />
+            ) : (
+              <PostCard
+                onClick={() =>
+                  router.push({
+                    pathname: "users/[name]",
+                    query: { name: info.user },
+                  })
+                }
+                cardKey={info.id}
+                thumbnail={info.segment}
+                detail1={info.on_air}
+                detail2={info.address}
+                detail3={info.user}
+                maintext1={info.contents}
+                maintext2={info.answer}
+                detail4={info.pt}
+                height={400}
+              />
+            )}
           </div>
         ))}
       </CardContainer>

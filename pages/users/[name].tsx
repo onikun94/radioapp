@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect, useState, VFC } from "react";
+import { parentPort } from "worker_threads";
 import { searchUser } from "../../api/getShimo";
 import { Header } from "../../components/molecules/header";
 import { PostList } from "../../components/templates/post-list";
@@ -14,7 +15,8 @@ export type UserPostPropType = {
 const UserPost: VFC<UserPostPropType> = ({ userdata }) => {
   const router = useRouter();
   const pname = router.query.name.toString(); //nameは[name].tsxから
-  const [count, setCount] = useState(0);
+  const path = router.asPath;
+  const partOfPath = decodeURI(path).split("/")[1];
 
   return (
     <>
@@ -25,8 +27,7 @@ const UserPost: VFC<UserPostPropType> = ({ userdata }) => {
           textType="24bold"
         ></Header>
       </HeaderContainer>
-      {/* <p>{pname}</p> */}
-      <PostList userName={pname} yatoInfo={userdata} />
+      <PostList userName={pname} pathName={partOfPath} yatoInfo={userdata} />
     </>
   );
 };
