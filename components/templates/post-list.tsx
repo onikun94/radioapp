@@ -6,27 +6,34 @@ import styled from "@emotion/styled";
 import { colors } from "../../styles/color";
 import { Header } from "../molecules/header";
 import { PostCard } from "../molecules/post-card";
+import Link from "next/link";
+import { DataLink } from "../atoms/data-link";
+import { useRouter } from "next/router";
+import { StringifyOptions } from "querystring";
+import { Typography } from "../atoms/typography";
 
 export type YatoListPropType = {
   yatoInfo: YatoType[];
+  userName?: string;
 };
 
-export const PostList: VFC<YatoListPropType> = ({ yatoInfo }) => {
+export const PostList: VFC<YatoListPropType> = ({ userName, yatoInfo }) => {
+  const router = useRouter();
   return (
     <Container>
-      <HeaderContainer>
-        <Header
-          headerText="shimohuriDatabase"
-          colorType="dark"
-          textType="24bold"
-        ></Header>
-      </HeaderContainer>
-
+      <NameContainer>
+        <Typography text={userName ? userName : ""} type="20bold" />
+      </NameContainer>
       <CardContainer>
         {yatoInfo.map((info) => (
           <div key={info.id}>
             <PostCard
-              onClick={handleUser}
+              onClick={() =>
+                router.push({
+                  pathname: "users/[name]",
+                  query: { name: info.user },
+                })
+              }
               cardKey={info.id}
               thumbnail={info.segment}
               detail1={info.on_air}
@@ -59,4 +66,9 @@ const CardContainer = styled.div({
   // width: "1000",
 });
 
-const HeaderContainer = styled.div({});
+const NameContainer = styled.div({
+  display: "flex",
+  justifyContent: "center",
+  flexWrap: "wrap",
+  padding: "16px",
+});
