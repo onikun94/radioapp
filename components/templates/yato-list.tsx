@@ -8,6 +8,7 @@ import { Header } from "../molecules/header";
 import { PostCard } from "../molecules/post-card";
 import Router, { useRouter } from "next/router";
 import { send } from "process";
+import { DataLink } from "../atoms/data-link";
 
 export type YatoListPropType = {
   yatoInfo: YatoType[];
@@ -27,14 +28,6 @@ export const YatoList: VFC<YatoListPropType> = ({ yatoInfo }) => {
 
   return (
     <Container>
-      <HeaderContainer>
-        <Header
-          headerText="shimohuriDatabase"
-          colorType="dark"
-          textType="24bold"
-        ></Header>
-      </HeaderContainer>
-
       <CardContainer>
         {dupArray.map((info) => (
           <div key={info.id}>
@@ -57,10 +50,10 @@ export const YatoList: VFC<YatoListPropType> = ({ yatoInfo }) => {
   );
 };
 
-const Container = styled.div({
+const Container = styled.body({
   // display: "flex",
-  maxWidth: "100%",
-  flexDirection: "column",
+  // maxWidth: "100%",
+  // flexDirection: "column",
   // flexWrap: "wrap",
   backgroundColor: colors.background.primary,
 });
@@ -71,5 +64,3 @@ const CardContainer = styled.div({
   flexWrap: "wrap",
   // width: "1000",
 });
-
-const HeaderContainer = styled.div({});
