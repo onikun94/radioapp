@@ -103,7 +103,6 @@ export const TextArea: VFC<TextAreaPropType> = ({
 }) => {
   return (
     <TextAreaElement
-      // value={value} //value指定すると文字打てなくなるけど....
       placeholder={placeholder}
       backgroundColorType={backgroundColor}
       onChange={(e) => onChange(e.target.value)}
@@ -115,18 +114,26 @@ const TextAreaElement = styled.textarea<{
 }>((props) => ({
   backgroundColor: colors.background[props.backgroundColorType],
   resize: "none",
-  border: "none",
+  // border: "none",
   outline: "none",
-  width: "200px",
+  width: "400px",
+  height: "20px",
+  position: "relative",
+  paddingTop: "5px",
+  paddingLeft: "10px",
   marginRight: "10px",
-  color: colors.text.accent,
-  borderBottom: `1px solid ${colors.base.alphaPrimary}`, //下線がつく
+
+  color: colors.text.primary,
+  border: `1px solid ${colors.base.alphaPrimary}`,
+  borderRadius: "2.5em",
   "::placeholder": {
     color: colors.text.gray,
-    // fontSize: "14px",
+    position: "relative",
+    fontSize: "14px",
   },
   ":focus": {
-    borderBottom: `1px solid ${colors.base.accent}`,
+    border: `1px solid ${colors.base.gray}`,
+    boxShadow: `0 0 0 1.5px ${colors.border.cardOutline}`,
   },
   transition: "0.2s all",
 }));
