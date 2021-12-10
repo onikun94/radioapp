@@ -4,6 +4,7 @@ import Link from "next/link";
 import { getYato } from "../api/getShimo";
 import { YatoList } from "../components/templates/yato-list";
 import { YatoType } from "../types/yato";
+import { Header } from "../components/molecules/header";
 
 export type DetailPagePropType = {
   response: YatoType[];
@@ -12,9 +13,13 @@ export type DetailPagePropType = {
 const UsersPage: VFC<DetailPagePropType> = ({ response }) => {
   return (
     <MainText>
-      <Link href="/">
-        <a>home</a>
-      </Link>
+      <HeaderContainer>
+        <Header
+          headerText="霜降りデータベース"
+          colorType="dark"
+          textType="24bold"
+        ></Header>
+      </HeaderContainer>
       <YatoList yatoInfo={response} />
     </MainText>
   );
@@ -28,5 +33,6 @@ export const getServerSideProps = async () => {
 };
 
 const MainText = styled.div({});
+const HeaderContainer = styled.div({});
 
 export default UsersPage;

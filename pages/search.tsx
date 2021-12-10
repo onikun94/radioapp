@@ -7,6 +7,7 @@ import { getYato, searchContents } from "../api/getShimo";
 import { SearchBar } from "../components/organisms/search-bar";
 import { handleOnChangeSearch, handleOnSearch } from "../lib/handler";
 import { useContents } from "../lib/hook";
+import { Header } from "../components/molecules/header";
 
 type SearchPagePropsType = {
   response: YatoType[];
@@ -21,7 +22,13 @@ const SearchPage: VFC<SearchPagePropsType> = ({
 
   return (
     <SearchText>
-      <Link href="/">home</Link>　
+      <HeaderContainer>
+        <Header
+          headerText="霜降りデータベース"
+          colorType="dark"
+          textType="24bold"
+        ></Header>
+      </HeaderContainer>
       <SearchBar
         onChange={(e) => handleOnChangeSearch(e, setSearchWord)}
         iconSearch="検索"
@@ -47,5 +54,6 @@ export const getServerSideProps = async (context) => {
 };
 
 const SearchText = styled.div({});
+const HeaderContainer = styled.div({});
 
 export default SearchPage;
