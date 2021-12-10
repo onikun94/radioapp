@@ -1,7 +1,9 @@
 import styled from "@emotion/styled";
 import { VFC } from "react";
 import { IconButton } from "../molecules/icon-button";
+import { colors } from "../../styles/color";
 import { TextArea } from "../atoms/text-input";
+import { relative } from "path/posix";
 
 export type SearchBarPropType = {
   value?: string;
@@ -28,7 +30,7 @@ export const SearchBar: VFC<SearchBarPropType> = ({
       <SearchButton
         // iconType="search"
         iconImage={iconSearch}
-        iconColor="accent"
+        iconColor="gray"
         backgroundColor="primary"
         onClick={onClickSearch}
         iconHeight="30px"
@@ -41,11 +43,14 @@ const Container = styled.div({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  paddingTop: "10px",
+  backgroundColor: colors.background.primary,
 });
 
 const SearchTextField = styled(TextArea)({
   height: "20px",
   maxWidth: "20px",
+  // "::placeholder": { position: "relative" },
 });
 
 const SearchButton = styled(IconButton)({
