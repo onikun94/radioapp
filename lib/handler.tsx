@@ -28,3 +28,24 @@ export const handleOnClickHeader = async () => {
 export const handleDebug = () => {
   console.log("button is pushed");
 };
+
+export const handleOnClickPaging = async (url: string | undefined) => {
+  if (url) {
+    const urlParams = new URLSearchParams(url.split("?")[1]);
+    const pageNumber = Number(urlParams.get("page"));
+    const searchWord = String(urlParams.get("keyword"));
+    if (searchWord !== "null") {
+      if (pageNumber && pageNumber >= 2) {
+        Router.push(`/serarch?keyword=${searchWord}&pages=${pageNumber}`);
+      } else {
+        Router.push(`search?keyword=${searchWord}`);
+      }
+    } else {
+      if (pageNumber && pageNumber >= 2) {
+        Router.push(`/?page=${pageNumber}`);
+      } else {
+        Router.push(`/`);
+      }
+    }
+  }
+};

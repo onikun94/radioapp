@@ -11,17 +11,22 @@ import { DataLink } from "../atoms/data-link";
 import { useRouter } from "next/router";
 import { StringifyOptions } from "querystring";
 import { Typography } from "../atoms/typography";
+import { Button } from "../atoms/button";
 
 export type YatoListPropType = {
   yatoInfo: YatoType[];
   userName?: string;
   pathName?: string;
+  onClickNext?: () => void;
+  onClickPrev?: () => void;
 };
 
 export const PostList: VFC<YatoListPropType> = ({
   userName,
   pathName,
   yatoInfo,
+  onClickNext,
+  onClickPrev,
 }) => {
   const router = useRouter();
   return (
@@ -64,7 +69,7 @@ export const PostList: VFC<YatoListPropType> = ({
                 detail2={info.address}
                 detail3={info.user}
                 maintext1={info.contents}
-                maintext2={info.answer}
+                maintext2={String(info.link)}
                 detail4={info.pt}
                 height={400}
               />
@@ -72,6 +77,38 @@ export const PostList: VFC<YatoListPropType> = ({
           </div>
         ))}
       </CardContainer>
+      <p>test</p>
+      <Button
+        backgroundColor={"accent"}
+        textColor={"primary"}
+        onClick={handleUser}
+      >
+        <p>bottan</p>
+      </Button>
+      <ButtonContainer>
+        {onClickPrev ? (
+          <Button
+            backgroundColor={"primary"}
+            textColor={"primary"}
+            onClick={onClickPrev}
+          >
+            <Typography text="前のページ" type="14normal" />
+          </Button>
+        ) : (
+          "onClickPrev作動していません"
+        )}
+        {onClickNext ? (
+          <Button
+            backgroundColor={"primary"}
+            textColor={"primary"}
+            onClick={onClickNext}
+          >
+            <Typography text="次のページ" type="14normal" />
+          </Button>
+        ) : (
+          "onClickNext作動していません"
+        )}
+      </ButtonContainer>
     </Container>
   );
 };
@@ -89,6 +126,13 @@ const CardContainer = styled.div({
   justifyContent: "center",
   flexWrap: "wrap",
   // width: "1000",
+});
+
+const ButtonContainer = styled.div({
+  display: "flex",
+  flexDirection: "column",
+  flexWrap: "wrap",
+  backgroundColor: colors.background.primary,
 });
 
 const NameContainer = styled.div({

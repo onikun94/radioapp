@@ -7,8 +7,15 @@ export type YatoType = {
   contents: string;
   answer: string;
   pt: number;
+  link: number;
+};
+
+export type PagingLink = {
+  next?: string;
+  prev?: string;
 };
 
 export type Response = {
   yatos: YatoType[];
+  // link: PagingLink;
 };
