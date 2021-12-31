@@ -39,7 +39,6 @@ export const IconButton: React.VFC<IconButtonPropType> = ({
       backgroundColor={backgroundColor}
     >
       検索
-      {/* <Icon source={{ uri: iconImage }} /> */}
     </Button>
   );
 };

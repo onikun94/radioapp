@@ -63,7 +63,7 @@ export type ButtonType = {
   backgroundColor?: BackgroundColor;
   textColor?: BaseColor;
   className?: string;
-  children: JSX.Element;
+  children: JSX.Element | string;
   onClick: () => void;
 };
 
