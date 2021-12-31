@@ -47,6 +47,6 @@ const DataLinkContainer = styled.p<{
   color: colors.base[props.textColor],
   backgroundColor: colors.background[props.backgroundColor],
   borderRadius: "4px",
-  padding: "4px",
+  padding: "4px 8px 4px 8px",
   margin: "4px",
 }));

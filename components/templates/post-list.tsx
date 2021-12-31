@@ -69,7 +69,7 @@ export const PostList: VFC<YatoListPropType> = ({
                 detail2={info.address}
                 detail3={info.user}
                 maintext1={info.contents}
-                maintext2={String(info.link)}
+                maintext2={info.answer}
                 detail4={info.pt}
                 height={400}
               />
@@ -77,14 +77,14 @@ export const PostList: VFC<YatoListPropType> = ({
           </div>
         ))}
       </CardContainer>
-      <p>test</p>
+      {/* <p>test</p>
       <Button
         backgroundColor={"accent"}
         textColor={"primary"}
         onClick={handleUser}
       >
         <p>bottan</p>
-      </Button>
+      </Button> */}
       <ButtonContainer>
         {onClickPrev ? (
           <Button
@@ -94,9 +94,7 @@ export const PostList: VFC<YatoListPropType> = ({
           >
             <Typography text="前のページ" type="14normal" />
           </Button>
-        ) : (
-          "onClickPrev作動していません"
-        )}
+        ) : null}
         {onClickNext ? (
           <Button
             backgroundColor={"primary"}
@@ -105,9 +103,7 @@ export const PostList: VFC<YatoListPropType> = ({
           >
             <Typography text="次のページ" type="14normal" />
           </Button>
-        ) : (
-          "onClickNext作動していません"
-        )}
+        ) : null}
       </ButtonContainer>
     </Container>
   );
@@ -130,8 +126,9 @@ const CardContainer = styled.div({
 
 const ButtonContainer = styled.div({
   display: "flex",
-  flexDirection: "column",
   flexWrap: "wrap",
+  justifyContent: "center",
+  alignItems: "center",
   backgroundColor: colors.background.primary,
 });
 

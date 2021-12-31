@@ -7,10 +7,10 @@ import { YatoType } from "../types/yato";
 import { Header } from "../components/molecules/header";
 
 export type DetailPagePropType = {
-  response: YatoType[];
+  results: YatoType[];
 };
 
-const UsersPage: VFC<DetailPagePropType> = ({ response }) => {
+const UsersPage: VFC<DetailPagePropType> = ({ results }) => {
   return (
     <MainText>
       <HeaderContainer>
@@ -20,15 +20,17 @@ const UsersPage: VFC<DetailPagePropType> = ({ response }) => {
           textType="24bold"
         ></Header>
       </HeaderContainer>
-      <YatoList yatoInfo={response} />
+      <YatoList yatoInfo={results} />
     </MainText>
   );
 };
 
 export const getServerSideProps = async () => {
-  const response = await getYato();
+  //ユーザページも次のページとか作ったほうがいい？
+  const requestUrl = `https://onikun.pythonanywhere.com/shimo/?limit=30`;
+  const response = await getYato(requestUrl);
   return {
-    props: { response },
+    props: { results: response.results },
   };
 };
 

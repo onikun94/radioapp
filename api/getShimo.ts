@@ -1,11 +1,16 @@
 import { Response } from "../types/yato";
-export const getYato = async (): Promise<Response> => {
-  const res = await fetch("http://localhost:8000/yato", {
-    method: "GET",
-  });
+
+export const getYato = async (url: string | null): Promise<Response> => {
+  const res = await fetch(
+    url ? url : "https://onikun.pythonanywhere.com/shimo",
+    {
+      method: "GET",
+    }
+  );
 
   const _res: Response = await res.json();
   console.log("getshimo");
+  console.log(url);
   console.log(_res);
 
   return _res;
@@ -15,9 +20,12 @@ export const searchUser = async (user) => {
   console.log("user is ");
   console.log(user);
   const data = encodeURI(user);
-  const res = await fetch(`http://localhost:8000/yato/?user=${data}`, {
-    method: "GET",
-  });
+  const res = await fetch(
+    `https://onikun.pythonanywhere.com/shimo/?user=${data}`,
+    {
+      method: "GET",
+    }
+  );
 
   const _res = await res.json();
   console.log("getUser");
@@ -27,9 +35,12 @@ export const searchUser = async (user) => {
 };
 
 export const searchAddress = async (address) => {
-  const res = await fetch(`http://localhost:8000/yato/?address=${address}`, {
-    method: "GET",
-  });
+  const res = await fetch(
+    `https://onikun.pythonanywhere.com/shimo/?address=${address}`,
+    {
+      method: "GET",
+    }
+  );
 
   const _res = await res.json();
   console.log("getAddress");
@@ -38,9 +49,12 @@ export const searchAddress = async (address) => {
   return _res;
 };
 export const searchSegment = async (segment) => {
-  const res = await fetch(`http://localhost:8000/yato/?segment=${segment}`, {
-    method: "GET",
-  });
+  const res = await fetch(
+    `https://onikun.pythonanywhere.com/shimo/?segment=${segment}`,
+    {
+      method: "GET",
+    }
+  );
 
   const _res = await res.json();
   console.log("getSegment");
@@ -51,9 +65,12 @@ export const searchSegment = async (segment) => {
 
 export const searchContents = async (contents) => {
   const data = encodeURI(contents);
-  const res = await fetch(`http://localhost:8000/yato/?contents=${data}`, {
-    method: "GET",
-  });
+  const res = await fetch(
+    `https://onikun.pythonanywhere.com/shimo/?contents=${data}`,
+    {
+      method: "GET",
+    }
+  );
 
   const _res = await res.json();
   console.log("getContents");
@@ -63,9 +80,12 @@ export const searchContents = async (contents) => {
 };
 
 export const searchAnswer = async (answer) => {
-  const res = await fetch(`http://localhost:8000/yato/?answer=${answer}`, {
-    method: "GET",
-  });
+  const res = await fetch(
+    `https://onikun.pythonanywhere.com/shimo/?answer=${answer}`,
+    {
+      method: "GET",
+    }
+  );
 
   const _res = await res.json();
   console.log("getAnswer");
@@ -75,9 +95,12 @@ export const searchAnswer = async (answer) => {
 };
 
 export const searchOnAir = async (on_air) => {
-  const res = await fetch(`http://localhost:8000/yato/?on_air=${on_air}`, {
-    method: "GET",
-  });
+  const res = await fetch(
+    `https://onikun.pythonanywhere.com/shimo/?on_air=${on_air}`,
+    {
+      method: "GET",
+    }
+  );
 
   const _res = await res.json();
   console.log("getOnAir");
@@ -87,7 +110,7 @@ export const searchOnAir = async (on_air) => {
 };
 
 export const searchPt = async (pt) => {
-  const res = await fetch(`http://localhost:8000/yato/?pt=${pt}`, {
+  const res = await fetch(`https://onikun.pythonanywhere.com/shimo/?pt=${pt}`, {
     method: "GET",
   });
 
@@ -97,16 +120,3 @@ export const searchPt = async (pt) => {
 
   return _res;
 };
-
-// export const postYato = async (pd) => {
-//   const data = pd;
-//   const res = await fetch("http://localhost:8000/yato/post", {
-//     method: "POST",
-//     headers: { "Content-Type": "application/json;charset=utf-8" },
-//     body: JSON.stringify(data),
-//   });
-//   const _res = await res.json();
-//   console.log("postshimo");
-//   console.log(_res);
-//   return _res;
-// };

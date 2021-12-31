@@ -16,6 +16,8 @@ export type PagingLink = {
 };
 
 export type Response = {
-  yatos: YatoType[];
-  // link: PagingLink;
+  count: number;
+  next: string;
+  previous: string;
+  results: YatoType[];
 };

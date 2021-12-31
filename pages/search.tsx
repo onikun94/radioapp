@@ -8,16 +8,14 @@ import { SearchBar } from "../components/organisms/search-bar";
 import { handleOnChangeSearch, handleOnSearch } from "../lib/handler";
 import { useContents } from "../lib/hook";
 import { Header } from "../components/molecules/header";
+import { Footer } from "../components/molecules/footer";
 
 type SearchPagePropsType = {
-  response: YatoType[];
+  results: YatoType[];
   paramSerachWord: string;
 };
 
-const SearchPage: VFC<SearchPagePropsType> = ({
-  response,
-  paramSerachWord,
-}) => {
+const SearchPage: VFC<SearchPagePropsType> = ({ results, paramSerachWord }) => {
   const { searchWord, setSearchWord } = useContents(paramSerachWord);
 
   return (
@@ -34,7 +32,14 @@ const SearchPage: VFC<SearchPagePropsType> = ({
         iconSearch="検索"
         onClickSearch={() => handleOnSearch(searchWord)}
       ></SearchBar>
-      <PostList yatoInfo={response}></PostList>
+      <PostList yatoInfo={results}></PostList>
+      {/* <FooterContainer>
+        <Footer
+          headerText="霜降りデータベースについて"
+          colorType="light"
+          textType="12bold"
+        ></Footer>
+      </FooterContainer> */}
     </SearchText>
   );
 };
@@ -47,7 +52,7 @@ export const getServerSideProps = async (context) => {
 
   return {
     props: {
-      response: response,
+      results: response.results,
       paramSerachWord: searchWord,
     },
   };
@@ -55,5 +60,6 @@ export const getServerSideProps = async (context) => {
 
 const SearchText = styled.div({});
 const HeaderContainer = styled.div({});
+const FooterContainer = styled.div({});
 
 export default SearchPage;

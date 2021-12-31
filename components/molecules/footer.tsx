@@ -15,7 +15,7 @@ export type HeaderPropType = {
 };
 const DEFAULT_TEXT_TYPE: TypographyType = "20bold";
 
-export const Header: React.VFC<HeaderPropType> = ({
+export const Footer: React.VFC<HeaderPropType> = ({
   headerText,
   colorType,
   textType,
@@ -44,17 +44,19 @@ export const Header: React.VFC<HeaderPropType> = ({
   );
 };
 
-const HeaderContainer = styled.header<{ colorType: HeaderColorType }>(
+const HeaderContainer = styled.footer<{ colorType: HeaderColorType }>(
   (props) => ({
     backgroundColor:
       props.colorType === "dark"
         ? colors.background.dark
         : colors.background.primary,
+    height: "50px",
+    width: "100%",
+    // position: "absolute",
+    bottom: 0,
     padding: "30px",
     // display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    // justifyContent: "left",
+    justifyContent: "left",
     // alignItems: "left",
     borderBottom: `2px solid ${colors.border.gray}`,
   })

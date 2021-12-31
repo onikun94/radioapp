@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Router, { useRouter } from "next/router";
 
-export const handleUser = () => {
-  console.log("ok handleUser");
+export const handleUser = (test: string) => {
+  console.log(test);
 };
 
 export const handleOnPage = () => {
@@ -31,21 +31,30 @@ export const handleDebug = () => {
 
 export const handleOnClickPaging = async (url: string | undefined) => {
   if (url) {
+    // const urlParams = new URLSearchParams(url.slice(-2));
+    console.log("url = ", url);
     const urlParams = new URLSearchParams(url.split("?")[1]);
-    const pageNumber = Number(urlParams.get("page"));
-    const searchWord = String(urlParams.get("keyword"));
-    if (searchWord !== "null") {
-      if (pageNumber && pageNumber >= 2) {
-        Router.push(`/serarch?keyword=${searchWord}&pages=${pageNumber}`);
-      } else {
-        Router.push(`search?keyword=${searchWord}`);
-      }
+    const pageNumber = Number(urlParams.get("offset")) / 10;
+    console.log("pageNumber =", pageNumber);
+    if (pageNumber) {
+      console.log("pagenumber is ", pageNumber);
+      Router.push(`/?page=${pageNumber}`);
     } else {
-      if (pageNumber && pageNumber >= 2) {
-        Router.push(`/?page=${pageNumber}`);
-      } else {
-        Router.push(`/`);
-      }
+      Router.push(`/`);
     }
+    // const searchWord = String(urlParams.get("keyword"));
+    // if (searchWord !== "null") {
+    // if (pageNumber && pageNumber >= 2) {
+    //   Router.push(`/serarch?keyword=${searchWord}&pages=${pageNumber}`);
+    // } else {
+    //   Router.push(`search?keyword=${searchWord}`);
+    // }
+    // } else {
+    //   if (pageNumber && pageNumber >= 2) {
+    //     Router.push(`/?page=${pageNumber}`);
+    //   } else {
+    //     Router.push(`/`);
+    //   }
+    // }
   }
 };

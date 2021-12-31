@@ -7,10 +7,10 @@ import { RankingList } from "../components/templates/ranking-list";
 import { YatoType } from "../types/yato";
 
 type rankingPagePropType = {
-  response: YatoType[];
+  results: YatoType[];
 };
 
-const RankingPage: VFC<rankingPagePropType> = ({ response }) => {
+const RankingPage: VFC<rankingPagePropType> = ({ results }) => {
   return (
     <div>
       <HeaderContainer>
@@ -20,7 +20,7 @@ const RankingPage: VFC<rankingPagePropType> = ({ response }) => {
           textType="24bold"
         ></Header>
       </HeaderContainer>
-      <RankingList rankingData={response} />
+      <RankingList rankingData={results} />
     </div>
   );
 };
@@ -28,9 +28,10 @@ const RankingPage: VFC<rankingPagePropType> = ({ response }) => {
 const HeaderContainer = styled.div({});
 
 export const getServerSideProps = async () => {
-  const response = await getYato();
+  const requestUrl = `https://onikun.pythonanywhere.com/shimo/?limit=1000`;
+  const response = await getYato(requestUrl);
   return {
-    props: { response },
+    props: { results: response.results },
   };
 };
 

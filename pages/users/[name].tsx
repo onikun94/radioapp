@@ -9,10 +9,10 @@ import { PostList } from "../../components/templates/post-list";
 import { YatoType } from "../../types/yato";
 
 export type UserPostPropType = {
-  userdata: YatoType[];
+  results: YatoType[];
 };
 
-const UserPost: VFC<UserPostPropType> = ({ userdata }) => {
+const UserPost: VFC<UserPostPropType> = ({ results }) => {
   const router = useRouter();
   const pname = router.query.name.toString(); //nameは[name].tsxから
   const path = router.asPath;
@@ -27,7 +27,7 @@ const UserPost: VFC<UserPostPropType> = ({ userdata }) => {
           textType="24bold"
         ></Header>
       </HeaderContainer>
-      <PostList userName={pname} pathName={partOfPath} yatoInfo={userdata} />
+      <PostList userName={pname} pathName={partOfPath} yatoInfo={results} />
     </>
   );
 };
@@ -37,7 +37,7 @@ const HeaderContainer = styled.div({});
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const userdata = await searchUser(context.query.name);
   return {
-    props: { userdata },
+    props: { results: userdata.results },
   };
 };
 

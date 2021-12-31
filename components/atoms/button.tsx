@@ -63,7 +63,7 @@ export type ButtonType = {
   backgroundColor?: BackgroundColor;
   textColor?: BaseColor;
   className?: string;
-  children: string;
+  children: JSX.Element;
   onClick: () => void;
 };
 
@@ -92,10 +92,12 @@ const ButtonContainer = styled.button<{
   display: "flex", //文字の位置
   justifyContent: "center",
   alignItems: "center",
+  margin: "4px",
+  marginBottom: "8px",
   color: colors.base[props.textColor ?? DEFAULT_TEXT_COLOR],
-  height: "auto",
-  width: "50px", //横幅
-  borderRadius: "4em", //縁の丸み
+  height: "40px",
+  width: "100px", //横幅
+  borderRadius: "4px", //縁の丸み
   borderColor: colors.border.cardOutline,
   borderWidth: "1px",
   boxSizing: "border-box",
